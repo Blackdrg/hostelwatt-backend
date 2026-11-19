@@ -15,13 +15,7 @@ const connectDB = async () => {
   } catch (err) {
     console.warn(`[Database] Failed to connect to ${uri}: ${err.message}`);
     
-    // In-memory fallback only in development
-    if (process.env.NODE_ENV === 'production') {
-      console.error(`[Database] Fatal: No MongoDB available in production. Set MONGO_URL or MONGODB_URI.`);
-      process.exit(1);
-    }
-    
-    console.log(`[Database] Starting embedded in-memory MongoDB fallback...`);
+    console.log(`[Database] Attempting embedded in-memory MongoDB fallback...`);
     try {
       const { MongoMemoryServer } = require('mongodb-memory-server');
       mongoMemoryServer = await MongoMemoryServer.create({
@@ -31,7 +25,8 @@ const connectDB = async () => {
       await mongoose.connect(memUri);
       console.log(`[Database] Successfully connected to In-Memory MongoDB at: ${memUri}`);
     } catch (memErr) {
-      console.error(`[Database] Fatal Error connecting to MongoDB:`, memErr);
+      console.error(`[Database] In-memory MongoDB failed: ${memErr.message}`);
+      console.error(`[Database] Please set MONGODB_URI in your environment variables with a free MongoDB Atlas connection string.`);
       process.exit(1);
     }
   }
