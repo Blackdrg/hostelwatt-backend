@@ -1,0 +1,31 @@
+{
+  "name": "hostelwatt-backend",
+  "version": "1.0.0",
+  "description": "HostelWatt Smart Hostel Energy Management System Backend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/scripts/seed.js",
+    "simulator": "node src/scripts/simulator.js"
+  },
+  "keywords": ["energy", "hostel", "iot", "mqtt", "esp32", "smart-meter"],
+  "author": "HostelWatt Team",
+  "license": "ISC",
+  "dependencies": {
+    "aedes": "^0.51.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
+    "mqtt": "^5.10.3",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.1.3"
+  }
+}
